@@ -49,4 +49,27 @@ export class TransactionService {
            ? Math.max(...this.transactions.map(t => t.id)) + 1 
            : 1;
   }
+
+  getBalance(): number {
+    // Calculate the balance by summing income and subtracting expenses
+    // This is a simplified example
+    return this.transactions
+      .map(t => t.type === 'income' ? t.amount : -t.amount)
+      .reduce((acc, amount) => acc + amount, 0);
+  }
+
+  getDailyBudget(): number {
+    const currentMonthTransactions = this.transactions.filter(t => {
+      const transactionDate = new Date(t.date);
+      const currentMonth = new Date().getMonth();
+      return transactionDate.getMonth() === currentMonth;
+    });
+
+    const monthlyIncome = currentMonthTransactions
+      .filter(t => t.type === 'income')
+      .reduce((acc, t) => acc + t.amount, 0);
+
+    const daysInCurrentMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate();
+    return monthlyIncome / daysInCurrentMonth;
+  }
 }
