@@ -2,7 +2,52 @@
     margin: 20px;
     padding: 20px;
     border: 1px solid #ccc;
-  }
-  
-  /* Add more styles as needed */
-  
+}
+
+.material-icons {
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.material-icons:hover {
+    background-color: #e0e0e0;
+    /* A light grey background on hover */
+}
+
+.grid-table {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    /* Adjust the number of columns as needed */
+}
+
+.grid-header {
+    background-color: #f5f5f5;
+    display: contents;
+}
+
+.grid-body {
+    display: contents;
+}
+
+.grid-row {
+    display: contents;
+}
+
+.grid-header>div,
+.grid-row>div {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    background-color: inherit;
+}
+
+.expense-row {
+    background-color: #ffcccc;
+    /* light red for expense */
+}
+
+.income-row {
+    background-color: #ccffcc;
+    /* light green for income */
+}

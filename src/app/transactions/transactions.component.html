@@ -1,23 +1,38 @@
 <div class="transactions-container">
-    <h2>Transactions</h2>
-    <ul>
-        <li *ngFor="let transaction of transactions">
-          <!-- ... display transaction data -->
-          <button (click)="editTransaction(transaction)">Edit</button>
-          <button (click)="deleteTransaction(transaction.id)">Delete</button>
-        </li>
-      </ul>
-  
-      <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
+    <h2>New Transaction</h2>
+    <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
         <input type="date" formControlName="date" required>
         <input type="text" formControlName="description" placeholder="Description" required>
         <input type="number" formControlName="amount" placeholder="Amount" required>
         <input type="text" formControlName="category" placeholder="Category" required>
         <select formControlName="type">
-          <option value="expense">Expense</option>
-          <option value="income">Income</option>
+            <option value="expense">Expense</option>
+            <option value="income">Income</option>
         </select>
-        <button type="submit">Add Transaction</button>
-      </form>
-  </div>
-  
+        <button type="submit">Save Transaction</button>
+        <button type="button" (click)="cancelEdit()" *ngIf="isEditMode">Cancel Edit</button>
+    </form>
+    <h2>Transactions</h2>
+    <div class="grid-table">
+        <div class="grid-header">
+            <div>Date</div>
+            <div>Description</div>
+            <div>Amount</div>
+            <div>Category</div>
+            <div>Actions</div>
+        </div>
+        <div class="grid-body">
+            <div *ngFor="let transaction of transactions; let i = index" class="grid-row"
+                [ngClass]="{'expense-row': transaction.type === 'expense', 'income-row': transaction.type === 'income'}">
+                <div>{{ transaction.date | date:'shortDate' }}</div>
+                <div>{{ transaction.description }}</div>
+                <div>{{ transaction.amount | currency }}</div>
+                <div>{{ transaction.category }}</div>
+                <div>
+                    <i class="material-icons" (click)="startEdit(transaction)">edit</i>
+                    <i class="material-icons" (click)="deleteTransaction(transaction.id)">delete</i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
