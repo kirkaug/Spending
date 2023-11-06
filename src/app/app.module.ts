@@ -10,6 +10,8 @@ import { ReportsComponent } from './reports/reports.component';
 import { BudgetPlanningComponent } from './budget-planning/budget-planning.component';
 import { SettingsComponent } from './settings/settings.component';
 
+import { ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +24,8 @@ import { SettingsComponent } from './settings/settings.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
